@@ -13,7 +13,7 @@ app.use(cors(
   {
     origin: 'https://estudio-jordanes.vercel.app',
     methods: ['POST'],
-    credentials: true
+    
   }
 )); //Permite que react(cliente) hable con mi backend
 app.use(bodyParser.json());//Permite que el backend entienda los datos JSON que envía el formulario
