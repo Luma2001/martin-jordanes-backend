@@ -51,7 +51,8 @@ app.post('/send', async (req, res) => {  //Crea una ruta que escucha cuando el f
   }
 });
 
-//Ruta de prueba para verificar que el servidor está funcionando
-app.listen(3001, () => {
-  console.log('Servidor funcionando en puerto 3001');
+//Para verificar que el servidor está funcionando
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+  console.log(`Servidor funcionando en puerto ${PORT}`);
 });
