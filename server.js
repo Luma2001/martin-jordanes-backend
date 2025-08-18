@@ -9,6 +9,9 @@ const nodemailer = require('nodemailer');//permite enviar correos electrónicos 
 
 //Creando y configurando la app(servidor)
 const app = express(); //inicializa el servidor Express
+
+app.use(express.json()); //Para que entienda JSON. Es un Middleware moderno para JSON
+app.use(express.urlencoded({ extended: true })); //Para que entienda datos codificados en URL (formularios  HTML)
 app.use(cors(
   {
     origin: 'https://estudio-jordanes.vercel.app',
@@ -16,7 +19,7 @@ app.use(cors(
     
   }
 )); //Permite que react(cliente) hable con mi backend
-app.use(bodyParser.json());//Permite que el backend entienda los datos JSON que envía el formulario
+//app.use(bodyParser.json());//Permite que el backend entienda los datos JSON que envía el formulario. Forma antigua de hacerlo
 
 
 //Ruta para manejar el envío del formulario
@@ -30,7 +33,7 @@ app.post('/send', async (req, res) => {  //Crea una ruta que escucha cuando el f
     host: 'smtp.gmail.com', //servidor SMTP de Gmail
     port: 465, //puerto para conexiones seguras
     secure: true, //false para conexiones no seguras (true para conexiones seguras)// true para 465, false para 587
-    //service: 'gmail', // o smtp de otro proveedor
+    service: 'gmail', // o smtp de otro proveedor
     auth: {//credenciales guardadas en variables de entorno
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS,
@@ -44,7 +47,7 @@ app.post('/send', async (req, res) => {  //Crea una ruta que escucha cuando el f
   const mailOptions = {
     from: email,
     to: process.env.CLIENT_EMAIL,
-    subject: 'NUEVO MENSAJE DE FORMULARIO',
+    subject: 'NUEVO MENSAJE DE FORMULARIO DE ESTUDIO MARTÍN JORDANES',
     text: `Nombre: ${nombre} ${apellido}\nTeléfono: ${telefono}\nEmail: ${email}\nMensaje: ${mensaje}`,
   };
 
