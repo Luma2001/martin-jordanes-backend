@@ -3,7 +3,7 @@ require('dotenv').config(); //carga variables de entorno desde .env
 //Carga de librerías necesarias
 const express = require('express'); //framework para crear el servidor
 const cors = require('cors'); //evita bloqueo de seguridad entre dominios- Permite que el frontend y backend se comuniquen
-const bodyParser = require('body-parser'); //permite leer datos enviados en el body de una solicitud (ej formulario)
+//const bodyParser = require('body-parser'); //permite leer datos enviados en el body de una solicitud (ej formulario)
 const nodemailer = require('nodemailer');//permite enviar correos electrónicos desde el servidor
 
 
