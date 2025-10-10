@@ -47,7 +47,7 @@ app.post('/send', async (req, res) => {  //Crea una ruta que escucha cuando el f
   const mailOptions = {
     from: email,
     to: process.env.CLIENT_EMAIL,
-    subject: 'NUEVO MENSAJE DE FORMULARIO DE ESTUDIO MARTÍN JORDANES',
+    subject: 'NUEVO MENSAJE DE FORMULARIO DE SITIO WEB ESTUDIO MARTÍN JORDANES',
     text: `Nombre: ${nombre} ${apellido}\nTeléfono: ${telefono}\nEmail: ${email}\nMensaje: ${mensaje}`,
   };
 
