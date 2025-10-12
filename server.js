@@ -21,6 +21,11 @@ app.use(cors(
 )); //Permite que react(cliente) hable con mi backend
 //app.use(bodyParser.json());//Permite que el backend entienda los datos JSON que envía el formulario. Forma antigua de hacerlo
 
+app.get('/', (req, res) => {
+  res.status(200).send("Backend activo y escuchado");
+}); //Ruta para verificar que el servidor funciona
+
+
 
 //Ruta para manejar el envío del formulario
 app.post('/send', async (req, res) => {  //Crea una ruta que escucha cuando el frontend hace un POST a /send
