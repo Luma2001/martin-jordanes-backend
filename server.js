@@ -59,9 +59,13 @@ app.post('/send', async (req, res) => {  //Crea una ruta que escucha cuando el f
 
   //Se intenta enviar el email, si sale bien responde con éxito, si falla responde con error si no lo captura y responde con mensaje de error
   try {
+    console.log("Solicitud recibida desde:", req.headers.origin);
+    console.log("Intentando enviar correo a:", process.env.CLIENT_EMAIL);
     await transporter.sendMail(mailOptions);
+    console.log("Correo enviado con éxito");
     res.status(200).send({ success: true });
   } catch (error) {
+    console.error("Error al enviar correo:", error);
     res.status(500).send({ success: false, error });
   }
 });
