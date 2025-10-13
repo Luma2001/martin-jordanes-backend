@@ -1,6 +1,11 @@
 
 require('dotenv').config(); //carga variables de entorno desde .env
 
+//Carga de librerías necesarias
+const express = require('express'); //framework para crear el servidor
+const cors = require('cors'); //evita bloqueo de seguridad entre dominios- Permite que el frontend y backend se comuniquen
+//const bodyParser = require('body-parser'); //permite leer datos enviados en el body de una solicitud (ej formulario)
+//const nodemailer = require('nodemailer');//permite enviar correos electrónicos desde el servidor
 
 
 
@@ -15,15 +20,6 @@ const mg = mailgun.client({
 
 
 
-
-
-require('dotenv').config(); //carga variables de entorno desde .env
-
-//Carga de librerías necesarias
-const express = require('express'); //framework para crear el servidor
-const cors = require('cors'); //evita bloqueo de seguridad entre dominios- Permite que el frontend y backend se comuniquen
-//const bodyParser = require('body-parser'); //permite leer datos enviados en el body de una solicitud (ej formulario)
-//const nodemailer = require('nodemailer');//permite enviar correos electrónicos desde el servidor
 
 const corsOptions = {
   origin: 'https://estudio-jordanes.vercel.app',
@@ -53,7 +49,7 @@ app.get('/', (req, res) => {
 }); //Ruta para verificar que el servidor funciona
 
 
-//Ruta para manejar el envío del formulario
+//Ruta para manejar el envío del formulario con mailgun
 app.post('/send', async (req, res) => {  //Crea una ruta que escucha cuando el frontend hace un POST a /send
   
   //contiene los datos del formulario enviados desde react
