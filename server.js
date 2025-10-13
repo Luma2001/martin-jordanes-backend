@@ -15,7 +15,9 @@ app.use(express.urlencoded({ extended: true })); //Para que entienda datos codif
 app.use(cors(
   {
     origin: 'https://estudio-jordanes.vercel.app',
-    methods: ['POST'],
+    methods: ['GET','POST','OPTIONS'],
+    allowedHeaders: ['Content-Type','X-Requested-With'],
+    credentials: true,
     
   }
 )); //Permite que react(cliente) hable con mi backend
