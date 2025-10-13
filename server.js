@@ -56,7 +56,7 @@ app.post('/send', async (req, res) => {  //Crea una ruta que escucha cuando el f
     },
     debug: true, // muestra detalles de la conexión en la consola
     logger: true, // muestra detalles de la conexión en la consola
-    connectionTimeout: 10000, // 10 segundos
+    // connectionTimeout: 10000, // 10 segundos
   });
 
   //Datos que se van a enviar en el correo electrónico
@@ -77,8 +77,8 @@ app.post('/send', async (req, res) => {  //Crea una ruta que escucha cuando el f
     
     
   } catch (error) {
-    console.error("Error al enviar correo:", error);
-    res.status(500).send({ success: false, error: "Error al enviar correo" });
+    console.error("Error al enviar correo:", error.message);
+    res.status(500).send({ success: false, error: error.message });
   }
 });
 
