@@ -1,3 +1,9 @@
+
+require('dotenv').config(); //carga variables de entorno desde .env
+
+
+
+
 const formData = require('form-data');
 const Mailgun = require('mailgun.js');
 const mailgun = new Mailgun(formData);
