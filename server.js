@@ -47,6 +47,9 @@ app.post('/send', async (req, res) => {  //Crea una ruta que escucha cuando el f
     tls:{
        rejectUnauthorized: false, // evita errores por certificados 
     },
+    debug: true, // muestra detalles de la conexión en la consola
+    logger: true, // muestra detalles de la conexión en la consola
+    connectionTimeout: 10000, // 10 segundos
   });
 
   //Datos que se van a enviar en el correo electrónico
@@ -61,9 +64,10 @@ app.post('/send', async (req, res) => {  //Crea una ruta que escucha cuando el f
   try {
     console.log("Solicitud recibida desde:", req.headers.origin);
     console.log("Intentando enviar correo a:", process.env.CLIENT_EMAIL);
-    await transporter.sendMail(mailOptions);
+    transporter.sendMail(mailOptions)
+      .then(()=>{res.status(200).send({ success: true });});
     console.log("Correo enviado con éxito");
-    res.status(200).send({ success: true });
+    
   } catch (error) {
     console.error("Error al enviar correo:", error);
     res.status(500).send({ success: false, error });
