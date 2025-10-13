@@ -22,8 +22,8 @@ app.use(cors(
 //app.use(bodyParser.json());//Permite que el backend entienda los datos JSON que envía el formulario. Forma antigua de hacerlo
 
 app.get('/', (req, res) => {
-  res.setHeader("X-Backend-Status", "awake");//agrega un encabezado personalizado a la respuesta para que cron seapa que el backend está activo
-  res.status(200).send("Backend activo y escuchado");
+  res.setHeader("X-Backend-Status", "awake");//agrega un encabezado personalizado a la respuesta para que cron sepa que el backend está activo
+  res.status(200).send("Backend activo y escuchando");
 }); //Ruta para verificar que el servidor funciona
 
 
