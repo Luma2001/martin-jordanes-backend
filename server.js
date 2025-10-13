@@ -6,20 +6,21 @@ const cors = require('cors'); //evita bloqueo de seguridad entre dominios- Permi
 //const bodyParser = require('body-parser'); //permite leer datos enviados en el body de una solicitud (ej formulario)
 const nodemailer = require('nodemailer');//permite enviar correos electrónicos desde el servidor
 
+const corsOptions = {
+  origin: 'https://estudio-jordanes.vercel.app',
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'X-Requested-With'],
+  credentials: true,
+};
+
+
 
 //Creando y configurando la app(servidor)
 const app = express(); //inicializa el servidor Express
 
 app.use(express.json()); //Para que entienda JSON. Es un Middleware moderno para JSON
 app.use(express.urlencoded({ extended: true })); //Para que entienda datos codificados en URL (formularios  HTML)
-app.use(cors(
-  {
-    origin: 'https://estudio-jordanes.vercel.app',
-    methods: ['GET','POST','OPTIONS'],
-    allowedHeaders: ['Content-Type','X-Requested-With'],
-    credentials: true,
-    
-  }
+app.use(cors(corsOptions
 )); //Permite que react(cliente) hable con mi backend
 //app.use(bodyParser.json());//Permite que el backend entienda los datos JSON que envía el formulario. Forma antigua de hacerlo
 
@@ -75,6 +76,9 @@ app.post('/send', async (req, res) => {  //Crea una ruta que escucha cuando el f
     res.status(500).send({ success: false, error });
   }
 });
+
+//soporte para solicitudes OPTIONS (preflight) de CORS
+app.options('*', cors(corsOptions));
 
 //Para verificar que el servidor está funcionando
 const PORT = process.env.PORT || 3001;
