@@ -20,9 +20,13 @@ const app = express(); //inicializa el servidor Express
 
 app.use(express.json()); //Para que entienda JSON. Es un Middleware moderno para JSON
 app.use(express.urlencoded({ extended: true })); //Para que entienda datos codificados en URL (formularios  HTML)
-app.use(cors(corsOptions
-)); //Permite que react(cliente) hable con mi backend
+
+//Permite que react(cliente) hable con mi backend
+app.use(cors(corsOptions)); 
 //app.use(bodyParser.json());//Permite que el backend entienda los datos JSON que envía el formulario. Forma antigua de hacerlo
+
+//soporte para solicitudes OPTIONS (preflight) de CORS
+app.options('/send', cors(corsOptions));
 
 app.get('/', (req, res) => {
   res.setHeader("X-Backend-Status", "awake");//agrega un encabezado personalizado a la respuesta para que cron sepa que el backend está activo
@@ -67,18 +71,18 @@ app.post('/send', async (req, res) => {  //Crea una ruta que escucha cuando el f
   try {
     console.log("Solicitud recibida desde:", req.headers.origin);
     console.log("Intentando enviar correo a:", process.env.CLIENT_EMAIL);
-    transporter.sendMail(mailOptions)
-      .then(()=>{res.status(200).send({ success: true });});
+    await transporter.sendMail(mailOptions);
     console.log("Correo enviado con éxito");
+    res.status(200).send({ success: true });
+    
     
   } catch (error) {
     console.error("Error al enviar correo:", error);
-    res.status(500).send({ success: false, error });
+    res.status(500).send({ success: false, error: "Error al enviar correo" });
   }
 });
 
-//soporte para solicitudes OPTIONS (preflight) de CORS
-app.options('*', cors(corsOptions));
+
 
 //Para verificar que el servidor está funcionando
 const PORT = process.env.PORT || 3001;
