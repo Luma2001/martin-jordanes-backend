@@ -1,6 +1,6 @@
 # Backend - Estudio Jurídico Martín Jordanes
 
-Este servidor maneja el envío de correos desde el formulario de contacto del sitio web.
+Este servidor maneja el envío de correos desde el formulario de contacto del sitio web https://estudio-jordanes.vercel.app/. El servidor está desarrollado en Node.js y está integrado con la API de Mailgun para asegurar la entrega fiable de formularios de contacto al correo electrónico corporativo.
 
 ## 🚀 Cómo iniciar
 
@@ -9,3 +9,6 @@ Este servidor maneja el envío de correos desde el formulario de contacto del si
 
 ```bash
 npm install
+```
+---
+## 🔗 Repositorio del Frontend: [(https://github.com/Luma2001/estudiojordanes)]
